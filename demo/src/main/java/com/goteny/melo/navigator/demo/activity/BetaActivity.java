@@ -38,8 +38,6 @@ public class BetaActivity extends AppCompatActivity implements View.OnClickListe
         button2.setOnClickListener(this);
 
         LogMelo.i(getClass().getSimpleName(), "onCreate()");
-
-        Navigator.page(this);
     }
 
     @Override

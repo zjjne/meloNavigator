@@ -10,6 +10,7 @@ public class TreeParent<E>
         T data;
         // 保存其父节点的位置
         int parent;
+        int position;
 
         public Node()
         {
@@ -33,28 +34,32 @@ public class TreeParent<E>
     }
 
 
-    private final int DEFAULT_TREE_SIZE = 100;
+    private final int DEFAULT_TREE_SIZE = 500;
     private int treeSize = 0;
     // 使用一个Node[]数组来记录该树里的所有节点
     private Node<E>[] nodes;
     // 记录树的节点数
     private int nodeNums;
 
-    // 以指定节点创建树
+    // 以指定根数据创建树
     public TreeParent(E data)
     {
         treeSize = DEFAULT_TREE_SIZE;
         nodes = new Node[treeSize];
-        nodes[0] = new Node<>(data, -1);
+        Node<E> node = new Node<>(data, -1);
+        node.position = 0;
+        nodes[0] = node;
         nodeNums++;
     }
 
-    // 以指定根节点、指定treeSize创建树
+    // 以指定根数据、指定treeSize创建树
     public TreeParent(E data, int treeSize)
     {
         this.treeSize = treeSize;
         nodes = new Node[treeSize];
-        nodes[0] = new Node<>(data, -1);
+        Node<E> node = new Node<>(data, -1);
+        node.position = 0;
+        nodes[0] = node;
         nodeNums++;
     }
 
@@ -67,7 +72,9 @@ public class TreeParent<E>
             if (nodes[i] == null)
             {
                 // 创建新节点，并用指定的数组元素保存它
-                nodes[i] = new Node(data, position(parent));
+                Node<E> node = new Node(data, position(parent));
+                node.position = i;
+                nodes[i] = node;
                 nodeNums++;
                 return nodes[i];
             }

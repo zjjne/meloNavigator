@@ -8,11 +8,11 @@ public class TreeFactory
 {
 
 
-    public TreeParent<String> createTree(Class<?> rootClxx)
+    public TreeParent<NodePage> createTree(Class<? extends PageListener> rootClxx)
     {
 
-        TreeParent<String> tree = new TreeParent<>(rootClxx.getName());
-        TreeParent.Node<String> nodeRoot = tree.root();
+        TreeParent<NodePage> tree = new TreeParent<>(new NodePage(rootClxx, null));
+        TreeParent.Node<NodePage> nodeRoot = tree.root();
 
         getAllNode(rootClxx, tree, nodeRoot);
 
@@ -32,7 +32,7 @@ public class TreeFactory
     }
 
 
-    private void getAllNode(Class<?> clxxParent, TreeParent<String> tree, TreeParent.Node<String> nodeParent)
+    private void getAllNode(Class<? extends PageListener> clxxParent, TreeParent<NodePage> tree, TreeParent.Node<NodePage> nodeParent)
     {
         Method[] methods = clxxParent.getDeclaredMethods();
 
@@ -44,9 +44,9 @@ public class TreeFactory
             {
                 if (next.value() != null)
                 {
-                    Class nextClxx = next.value();
+                    Class<? extends PageListener> nextClxx = next.value();
 
-                    TreeParent.Node<String> node = tree.addNode(nextClxx.getName(), nodeParent);
+                    TreeParent.Node<NodePage> node = tree.addNode(new NodePage(nextClxx, method.getName()), nodeParent);
 
                     //防止死循环，上溯所有父节点，如果存在同名父节点，则跳到下一个循环
                     boolean isParentNode = hasNode(nextClxx, tree, nodeParent);
@@ -60,13 +60,13 @@ public class TreeFactory
         }
     }
 
-    private boolean hasNode(Class clxx, TreeParent<String> tree, TreeParent.Node<String> nodeParent)
+    private boolean hasNode(Class<? extends PageListener> clxx, TreeParent<NodePage> tree, TreeParent.Node<NodePage> nodeParent)
     {
         if (nodeParent == null)
             return false;
 
 
-        if (nodeParent.data.equals(clxx.getName()))
+        if (nodeParent.data.pageClass.equals(clxx))
         {
             return true;
         }else {

@@ -11,7 +11,7 @@ import com.goteny.melo.utils.log.LogMelo;
 
 
 @ActivityAnno(AlphaActivity.class)
-public class PageA implements PageListener
+public class PageA extends PageListener
 {
 
 

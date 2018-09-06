@@ -8,7 +8,7 @@ import com.goteny.melo.navigator.demo.activity.BetaActivity;
 import com.goteny.melo.utils.log.LogMelo;
 
 @ActivityAnno(BetaActivity.class)
-public class PageB implements PageListener
+public class PageB extends PageListener
 {
     public void onDone(Bundle bundle)
     {

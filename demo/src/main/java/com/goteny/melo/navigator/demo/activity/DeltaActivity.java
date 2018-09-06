@@ -38,8 +38,6 @@ public class DeltaActivity extends AppCompatActivity implements View.OnClickList
         button2.setOnClickListener(this);
 
         LogMelo.i(getClass().getSimpleName(), "onCreate()");
-
-        Navigator.page(this);
     }
 
     @Override
@@ -57,7 +55,7 @@ public class DeltaActivity extends AppCompatActivity implements View.OnClickList
                 page.onNext(bundle);
                 break;
             case R.id.btn1:
-                Toast.makeText(this, "没东西", Toast.LENGTH_SHORT).show();
+                page.onFinish();
                 break;
             case R.id.btn2:
                 Toast.makeText(this, "没东西", Toast.LENGTH_SHORT).show();

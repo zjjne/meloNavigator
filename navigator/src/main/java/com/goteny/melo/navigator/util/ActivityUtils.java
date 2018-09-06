@@ -1,10 +1,11 @@
-package com.goteny.melo.navigator;
+package com.goteny.melo.navigator.util;
 
 import android.app.Activity;
 import android.app.Application;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -55,26 +56,24 @@ public class ActivityUtils
     }
 
 
-    public static void finishActivity(Application application, Class activityClass)
+    public static boolean finishActivity(Application application, Class<? extends Activity> activityClass)
     {
-        if (activityClass == null) return;
+        if (activityClass == null)
+            return false;
 
-        List<Activity> activities = getActivitiesStack(application);
+        List<Class<? extends Activity>> activityClasses = new ArrayList<>();
+        activityClasses.add(activityClass);
 
-        for (Activity activity: activities)
-        {
-            if (activity.getClass().getName().equals(activityClass.getName()))
-            {
-                activity.finish();
-                return;
-            }
-        }
+        return finishActivities(application, activityClasses);
     }
 
 
-    public static void finishActivities(Application application, Class ...activityClasses)
+    public static boolean finishActivities(Application application, List<Class<? extends Activity>> activityClasses)
     {
-        if (activityClasses == null || activityClasses.length <= 0) return;
+        boolean result = false;
+
+        if (application == null || activityClasses == null || activityClasses.size() <= 0)
+            return result;
 
         List<Activity> activities = getActivitiesStack(application);
 
@@ -85,10 +84,13 @@ public class ActivityUtils
                 if (activity.getClass().getName().equals(clxx.getName()))
                 {
                     activity.finish();
+                    result = true;
                     break;
                 }
             }
         }
+
+        return result;
     }
 
 }

@@ -38,8 +38,6 @@ public class GammaActivity extends AppCompatActivity implements View.OnClickList
         button2.setOnClickListener(this);
 
         LogMelo.i(getClass().getSimpleName(), "onCreate()");
-
-        Navigator.page(this);
     }
 
     @Override

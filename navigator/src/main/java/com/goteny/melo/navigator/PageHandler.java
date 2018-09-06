@@ -2,8 +2,8 @@ package com.goteny.melo.navigator;
 
 
 import android.os.Bundle;
-import android.util.Log;
 
+import com.goteny.melo.navigator.annotation.Finish;
 import com.goteny.melo.navigator.annotation.Next;
 import com.goteny.melo.utils.log.LogMelo;
 import com.mdit.library.proxy.MethodProxy;
@@ -53,13 +53,14 @@ public class PageHandler
 
             Method superMethod = superClass.getMethod(method.getMethodName(), method.getArgsType());
 
-            Next next = superMethod.getAnnotation(Next.class);
 
-            Log.d(PageHandler.class.getSimpleName(), "" + next);
+            Next next = superMethod.getAnnotation(Next.class);
+            Finish finish = superMethod.getAnnotation(Finish.class);
+
+            LogMelo.d("" + next);
 
             if (next != null)
             {
-
                 LogMelo.d("" + next.value());
 
                 Bundle bundle = null;
@@ -69,12 +70,27 @@ public class PageHandler
                     bundle = (Bundle) args[0];
                 }
 
+
+                //TODO 以后改造，为了可以动态化配置树，此处next.value()改为可以是null，null的话从其他地方取得下一个页面的class
                 if (next.value() != null)
                 {
-                    Class clxx = next.value();
-                    listener.onNext(clxx, bundle);
+                    Class<? extends PageListener> nextClass = next.value();
+                    String action = method.getMethodName();
+                    ActionNext actionNext = new ActionNext();
+                    actionNext.currentPage = superClass;
+                    actionNext.nextPage = nextClass;
+                    actionNext.action = action;
+                    actionNext.bundle = bundle;
+                    listener.onNext(actionNext);
                 }
+            }
 
+
+
+            if (finish != null)
+            {
+                LogMelo.d("Finish");
+                listener.onFinish(superClass);
             }
 
             return object;

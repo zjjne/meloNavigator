@@ -1,6 +1,6 @@
 package com.goteny.melo.navigator;
 
-public interface PageListener
+public abstract class PageListener
 {
-
+    public TreeParent.Node<NodePage> node;
 }

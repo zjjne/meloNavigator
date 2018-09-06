@@ -4,33 +4,30 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.goteny.melo.navigator.TreeFactory;
-import com.goteny.melo.navigator.Navigator;
 import com.goteny.melo.navigator.annotation.PageAnno;
 import com.goteny.melo.navigator.demo.R;
-import com.goteny.melo.navigator.demo.page.PageA;
+import com.goteny.melo.navigator.demo.page.PageE;
 import com.goteny.melo.utils.log.LogMelo;
 
-
-@PageAnno(PageA.class)
-public class AlphaActivity extends AppCompatActivity implements View.OnClickListener
+@PageAnno(PageE.class)
+public class EpsilonActivity extends AppCompatActivity implements View.OnClickListener
 {
 
     Button button0;
     Button button1;
     Button button2;
-    PageA page;
+    PageE page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        LogMelo.i(getClass().getSimpleName(), "onCreate()");
-
         setContentView(R.layout.activity_main);
 
         setTitle(getTitle() + ":" + getClass().getSimpleName());
+
 
         button0 = (Button) findViewById(R.id.btn0);
         button1 = (Button) findViewById(R.id.btn1);
@@ -39,8 +36,7 @@ public class AlphaActivity extends AppCompatActivity implements View.OnClickList
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
 
-        Navigator.initTree(new TreeFactory().createTree(PageA.class));
-
+        LogMelo.i(getClass().getSimpleName(), "onCreate()");
     }
 
     @Override
@@ -55,13 +51,13 @@ public class AlphaActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.btn0:
-                page.onDone(bundle);
-                break;
-            case R.id.btn1:
                 page.onNext(bundle);
                 break;
+            case R.id.btn1:
+                Toast.makeText(this, "没东西", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.btn2:
-                page.onSkip(bundle);
+                Toast.makeText(this, "没东西", Toast.LENGTH_SHORT).show();
                 break;
         }
 
