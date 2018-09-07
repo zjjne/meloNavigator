@@ -1,1 +1,1 @@
-include ':demo', ':navigator', ':mdlibrary'
+include ':demo', ':navigator'

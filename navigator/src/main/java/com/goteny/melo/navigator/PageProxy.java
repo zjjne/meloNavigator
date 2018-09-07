@@ -4,9 +4,9 @@ package com.goteny.melo.navigator;
 import android.app.Application;
 
 import com.goteny.melo.utils.log.LogMelo;
-import com.mdit.library.proxy.Enhancer;
-import com.mdit.library.proxy.MethodInterceptor;
-import com.mdit.library.proxy.MethodProxy;
+import com.goteny.melo.utils.cglibAndroid.proxy.Enhancer;
+import com.goteny.melo.utils.cglibAndroid.proxy.MethodInterceptor;
+import com.goteny.melo.utils.cglibAndroid.proxy.MethodProxy;
 
 /**
  * 代理类

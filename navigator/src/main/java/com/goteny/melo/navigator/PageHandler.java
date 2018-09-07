@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.goteny.melo.navigator.annotation.Finish;
 import com.goteny.melo.navigator.annotation.Next;
 import com.goteny.melo.utils.log.LogMelo;
-import com.mdit.library.proxy.MethodProxy;
+import com.goteny.melo.utils.cglibAndroid.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 
