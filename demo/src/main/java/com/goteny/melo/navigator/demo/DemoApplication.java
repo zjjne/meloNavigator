@@ -11,5 +11,6 @@ public class DemoApplication extends Application
     {
         super.onCreate();
         Navigator.init(this);
+        Navigator.enableLog(true);
     }
 }

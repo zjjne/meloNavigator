@@ -41,6 +41,10 @@ public class Navigator implements NaviListener, Application.ActivityLifecycleCal
         }
     }
 
+    public static void enableLog(boolean enable) {
+        LogMelo.enableLog(enable);
+    }
+
 
     public static void initTree(TreeParent<NodePage> tree)
     {
